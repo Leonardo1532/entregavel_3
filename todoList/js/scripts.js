@@ -1,19 +1,54 @@
 // Clase
 
 class ToDo {
-
+  Texto
+  Prioridade
+  Feito
+  constructor(texto, prioridade) {
+    this.Texto = texto
+    this.Prioridade = prioridade
+    this.Feito = false
+  }
 }
 
 // Array
-
+let ToDos = []
 
 //funções projeto
 
-function CriarToDo() {
 
+
+
+function CriarToDo(texto, prioridade, ToDos) {
+
+  let novoToDo = new ToDo(texto, prioridade)
+
+  if (!ToDos.some(x => x === novoToDo)) {
+    ToDos.push(novoToDo)
+    return novoToDo
+  }
 }
 
-function AtualizarToDo() {
+
+// Crie a função AtualizarToDo(), que recebe como parâmetro o textoAntigo: string, o textoNovo: string e um array: [] ToDos;
+
+// Essa função deve pesquisar o objeto ToDo dentro do array que tenha o Texto igual ao textoAntigo recebido;
+
+// Se o objeto for encontrado, atualize o texto e retorne true;
+
+// Se o objeto não for encontrado, retorne false.
+
+
+
+function AtualizarToDo(textoAntigo, textoNovo, ToDos) {
+  for (let index = 0; index < ToDos.length; index++) {
+    if (textoAntigo === ToDos[index].Texto) {
+      textoAntigo = textoNovo
+      return true
+    } else {
+      return false
+    }
+  }
 
 }
 
@@ -26,14 +61,14 @@ function ExcluirToDo() {
 }
 
 function PesquisarToDo() {
- 
+
 }
 
 function OrdenarCrescente() {
-  
+
 }
 function OrdenarDecrescente() {
-  
+
 }
 
 // Seleção de elementos
@@ -116,7 +151,7 @@ const updateTodo = (text) => {
 
   });
 
-  let atualizado = AtualizarToDo(targetTodo.innerText, text,arrayTodos)
+  let atualizado = AtualizarToDo(targetTodo.innerText, text, arrayTodos)
 
   if (atualizado) {
     targetTodo.innerText = text;
