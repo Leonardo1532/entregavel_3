@@ -12,19 +12,19 @@ class ToDo {
 }
 
 // Array
-let ToDos = []
+let arrayTodos = []
 
 //funções projeto
 
 
 
 
-function CriarToDo(texto, prioridade, ToDos) {
+function CriarToDo(texto, prioridade, arrayTodos) {
 
   let novoToDo = new ToDo(texto, prioridade)
 
-  if (!ToDos.some(x => x === novoToDo)) {
-    ToDos.push(novoToDo)
+  if (!arrayTodos.some(x => x === novoToDo)) {
+    arrayTodos.push(novoToDo)
     return novoToDo
   }
 }
@@ -40,9 +40,9 @@ function CriarToDo(texto, prioridade, ToDos) {
 
 
 
-function AtualizarToDo(textoAntigo, textoNovo, ToDos) {
-  for (let index = 0; index < ToDos.length; index++) {
-    if (textoAntigo === ToDos[index].Texto) {
+function AtualizarToDo(textoAntigo, textoNovo, arrayToDos) {
+  for (let index = 0; index < arrayToDos.length; index++) {
+    if (textoAntigo === arrayToDos[index].Texto) {
       textoAntigo = textoNovo
       return true
     } else {
@@ -52,23 +52,51 @@ function AtualizarToDo(textoAntigo, textoNovo, ToDos) {
 
 }
 
-function ConcluirToDo() {
-
+function ConcluirToDo(arrayToDos, texto) {
+  arrayToDos.forEach(x => {
+    if (x.Texto === texto) {
+      if (x.Feito === false) {
+        x.Feito === true
+        return true
+      } else {
+        x.Feito === false
+        return true
+      }
+    } else {
+      return false
+    }
+  })
 }
 
-function ExcluirToDo() {
-
+function ExcluirToDo(arrayToDos, texto) {
+  arrayToDos.forEach(x => {
+    if (x.Texto === texto) {
+      arrayToDos.splice(x, 1)
+      return true
+    } else {
+      return false
+    }
+  })
 }
 
-function PesquisarToDo() {
-
+function PesquisarToDo(arrayToDos, texto) {
+  arrayToDos.forEach(x => {
+    if (x.Texto === texto) {
+      console.log(x)
+      return true
+    } else {
+      return false
+    }
+  })
 }
 
-function OrdenarCrescente() {
-
+function OrdenarCrescente(arrayToDos) {
+  let arrayOrdenarCrescente = arrayToDos.sort(a < b)
+  return arrayOrdenarCrescente
 }
-function OrdenarDecrescente() {
-
+function OrdenarDecrescente(arrayToDos) {
+  let arrayOrdenarDecrescente = arrayToDos.sort(a > b)
+  return arrayOrdenarDecrescente
 }
 
 // Seleção de elementos
