@@ -16,88 +16,72 @@ let arrayTodos = []
 
 //funções projeto
 
-
-
-
 function CriarToDo(texto, prioridade, arrayTodos) {
 
   let novoToDo = new ToDo(texto, prioridade)
 
-  if (!arrayTodos.some(x => x === novoToDo)) {
+  if (!arrayTodos.some(x => x.Texto == texto)) {
     arrayTodos.push(novoToDo)
-    return novoToDo
   }
+  return novoToDo
 }
 
-
-// Crie a função AtualizarToDo(), que recebe como parâmetro o textoAntigo: string, o textoNovo: string e um array: [] ToDos;
-
-// Essa função deve pesquisar o objeto ToDo dentro do array que tenha o Texto igual ao textoAntigo recebido;
-
-// Se o objeto for encontrado, atualize o texto e retorne true;
-
-// Se o objeto não for encontrado, retorne false.
-
-
-
-function AtualizarToDo(textoAntigo, textoNovo, arrayToDos) {
-  for (let index = 0; index < arrayToDos.length; index++) {
-    if (textoAntigo === arrayToDos[index].Texto) {
-      textoAntigo = textoNovo
-      return true
-    } else {
-      return false
+function AtualizarToDo(textoAntigo, textoNovo, arrayTodos) {
+  let responseAtualizar = false
+  for (let index = 0; index < arrayTodos.length; index++) {
+    if (arrayTodos[index].Texto === textoAntigo) {
+      arrayTodos[index].Texto = textoNovo
+      responseAtualizar = true
     }
   }
-
+  return responseAtualizar
 }
 
-function ConcluirToDo(arrayToDos, texto) {
-  arrayToDos.forEach(x => {
-    if (x.Texto === texto) {
-      if (x.Feito === false) {
-        x.Feito === true
-        return true
+function ConcluirToDo(arrayTodos, texto) {
+  let responseConcluir = false
+  for (let index = 0; index < arrayTodos.length; index++) {
+    if (arrayTodos[index].Texto == texto) {
+      if (arrayTodos[index].Feito == false) {
+        arrayTodos[index].Feito = true
       } else {
-        x.Feito === false
-        return true
+        arrayTodos[index].Feito = false
       }
-    } else {
-      return false
+      responseConcluir = true
     }
-  })
+  }
+  return responseConcluir
 }
 
-function ExcluirToDo(arrayToDos, texto) {
-  arrayToDos.forEach(x => {
-    if (x.Texto === texto) {
-      arrayToDos.splice(x, 1)
-      return true
-    } else {
-      return false
+function ExcluirToDo(arrayTodos, texto) {
+  let responseExcluir = false
+  for (let index = 0; index < arrayTodos.length; index++) {
+    if (arrayTodos[index].Texto === texto) {
+      arrayTodos.splice(index, 1)
+      responseExcluir = true
     }
-  })
+  }
+  return responseExcluir
 }
 
-function PesquisarToDo(arrayToDos, texto) {
-  arrayToDos.forEach(x => {
-    if (x.Texto === texto) {
-      console.log(x)
-      return true
-    } else {
-      return false
-    }
-  })
+function PesquisarToDo(arrayTodos, texto) {
+  let responsePesquisar = false
+  if (arrayTodos.some(x => x.Texto === texto)) {
+    responsePesquisar = true
+  }
+  return responsePesquisar
 }
 
-function OrdenarCrescente(arrayToDos) {
-  let arrayOrdenarCrescente = arrayToDos.sort(a < b)
-  return arrayOrdenarCrescente
+function OrdenarCrescente(arrayTodos) {
+  arrayTodos.sort((a, b) => a.Prioridade - b.Prioridade)
+  return arrayTodos
 }
-function OrdenarDecrescente(arrayToDos) {
-  let arrayOrdenarDecrescente = arrayToDos.sort(a > b)
-  return arrayOrdenarDecrescente
+
+function OrdenarDecrescente(arrayTodos) {
+  arrayTodos.sort((a, b) => b.Prioridade - a.Prioridade)
+  return arrayTodos
 }
+
+
 
 // Seleção de elementos
 const todoForm = document.querySelector("#todo-form");
